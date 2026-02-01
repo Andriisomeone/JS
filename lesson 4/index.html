@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<script>
+    function writer(productTitle, price, descr) {
+        document.write(`
+    <div>
+      <h2>${productTitle} ${price}</h2>
+      <p>${descr}</p>
+    </div>
+  `);
+    }
+
+    writer('milk', 32, 'some milk');
+    writer('meat', 150, 'iklsagdjlksgadfklj;asgd;ljasgdl;jhhjgasd');
+
+
+</script>
+</body>
+</html>

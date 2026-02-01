@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<script>
+    let user = {
+        id:1;
+        name: "John",
+        status: true,
+        skills: [],
+    }
+    for (let fieldName in user) {
+        console.log(fieldName), user[fieldName] = user[fieldName];
+    }
+</script>
+</body>
+</html>
