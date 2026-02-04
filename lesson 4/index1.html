@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<script>
+    function userFactory(id, imya, age , status) {
+       let user = {
+           id:1,
+           name: imya,
+           age: age,
+           status: status,
+       }
+       return user;
+    }
+    let u1 = userFactory(1, ,'kokos',123, false);
+    let u2 = userFactory(2, 'abrikos',321, true);
+    let u3 = userFactory(3, 'tomat',433, false);
+    let u4 = userFactory(4, 'kukumber',465,true);
+    console.log(u1);
+    console.log(u2);
+    console.log(u3);
+    console.log(u4);
+
+</script>
+</body>
+</html>
