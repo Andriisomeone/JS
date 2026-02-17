@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<script>
+   // function asd(){
+  //      let x = 10;
+    //    function inner(){
+  //          return ++x;
+  //      }
+  //      return inner;
+    }
+ //   let foo = asd():
+ //   console.log(foo());
+//console.log(foo());
+ //   console.log(foo());
+  //  console.log(foo());
+  //  console.log(foo());
+   // console.log(foo());
+
+
+
+
+
+
+
+
+ //  let user = {name: 'asfdsafas', age: 123};
+ //   user.age = -100500;
+
+   function userBuilder(name, age){
+    let user = {name, age};
+    return {
+        getName(){
+            return user.name;
+        },
+        getAge(){
+            return user.age;
+        },
+        setAge(age){
+            if(age > 0){
+                user.age = age;
+            }
+        }
+    }
+   }
+   let builder = userBuilder('vasya', 31);
+    console.log(builder.getName());
+    console.log(builder.getAge());
+   builder.setAge(100);
+</script>
+</body>
+</html>
