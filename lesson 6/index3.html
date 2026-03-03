@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<script>
+    //function foo(bar){
+    //    console.log(100);
+   // }
+   // foo(100)
+   // function foo(bar){
+   //     console.log(bar);
+  //  }
+
+   // function h(){
+   //     return 100;
+   /// }());
+//
+   // foo(h())
+   // function foo(callback){
+    //    console.log(callback());
+  //  }
+
+   // foo(function (){
+   //     return 100;
+    //});
+
+
+
+  //  function calc(a, b, action){
+   //     if (action == "+"){
+   //         return a + b;
+   //     }else if (action == "-"){
+   //         return a - b;
+   //     }
+  //  }
+
+
+
+
+     function calc(a, b, callback){
+         return callback(a, b);
+     }
+     console.log(calc(10,20, (a, b) => {
+         return a + b;
+     }));
+
+     console.log(calc(10,20,(a, b) => a - b));
+
+
+</script>
+</body>
+</html>

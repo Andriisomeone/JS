@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<script>
+
+
+
+
+    let users = [
+        {name: 'vasya', age: 31, status: false},
+        {name: 'petya', age: 30, status: true},
+        {name: 'kolya', age: 29, status: true},
+        {name: 'olya', age: 28, status: false},
+        {name: 'max', age: 30, status: true},
+        {name: 'anya', age: 31, status: false},
+        {name: 'oleg', age: 28, status: false},
+        {name: 'andrey', age: 29, status: true},
+        {name: 'masha', age: 30, status: true},
+        {name: 'olya', age: 31, status: false},
+        {name: 'max', age: 31, status: true}
+    ];
+
+   // users.forEach(function (value) {
+    //    console.log(value);
+
+ //   });
+
+   // users.forEach((value, index, array) => console.log(index, value));
+
+
+
+    //users.filter(value => console.log(value));
+
+  //  let mapedUsers = users.map(function (value, index) {
+    //    return{...value,id:index+1};
+ //   });
+ //   console.log(mapedUsers);
+
+
+  //  let find = users.find(value => value.name === 'vasya');
+   // console.log(find);
+
+
+ //   console.log(users.every(value => value.name === 'vasya'));
+
+
+
+
+  //  console.log(users.sort((a, b) => {
+   ///     if (a.name < b.name) {
+   ///         return 1;
+   //     }
+   ///     if (a.name > b.name) {
+  //          return -1;
+  ///      }
+  //      if (a.name === b.name) {
+ //           return 0;
+ //       }
+ //////   }));
+
+    let reduce = users.reduce((accumulator, user) => {
+        if (user.status) {
+            accumulator.statT.push(user);
+        } else {
+            accumulator.statF.push(user);
+        }
+        return accumulator;
+    }, {statT: [], statF: []});
+
+    console.log(reduce);
+    console.log(users);
+
+
+
+
+</script>
+</body>
+</html>
