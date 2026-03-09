@@ -5,6 +5,28 @@
     <title>Title</title>
 </head>
 <body>
+<script>
+   // function User(name,age, status){
+     //   this.name=name;
+    //    this.age=age;
+     //   this.status=status;
+      //  console.log(this);
 
+   // }
+    //new User('asd',123,true);
+
+   function User(name,age,status,wifeName,wifeAge){
+       this.name=name;
+       this.age=age;
+       this.status=status;
+       this.wife ={name:wifeName, age:wifeAge};
+       this.greeting = function(){
+           console.log('hi')
+       }
+   }
+   let user = new User('asd',123,true,'anna',28);
+   console.log(user);
+
+</script>
 </body>
 </html>
