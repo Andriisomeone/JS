@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<script>
+    let user = {
+        name: "John",
+        skills: ['html','js'],
+        greeting: function() {
+        }
+    }
+    //let userClone = {...user};
+    //console.log(user === userClone);
+    //console.log(user.skills === userClone.skills);
+
+
+    let userJsonClone = JSON.stringify(user);
+    console.log(userJsonClone);
+    let parse = JSON.parse(userJsonClone);
+    console.log(parse);
+    console.log(user);
+    console.log(user === parse);
+    console.log(user.skills === parse.skills);
+</script>
+</body>
+</html>
