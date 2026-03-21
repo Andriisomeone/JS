@@ -1,10 +1,33 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>$Title$</title>
+    <meta charset="UTF-8">
+    <title>Title</title>
 </head>
 <body>
-$END$
+<h1>DOM title</h1>
+<ul class="menu" id="list-1">
+    <li>item 1 1</li>
+    <li>item 1 2</li>
+    <li>item 1 3</li>
+    <li>item 1 4</li>
+    <li>item 1 5</li>
+</ul>
+<ul class="menu" id="list" >
+    <li>item 1 1</li>
+    <li>item 1 2</li>
+    <li>item 1 3</li>
+    <li>item 1 4</li>
+    <li>item 1 5</li>
+</ul>
+<script>
+    console.log(document.head);
+    console.log(document.head.children);
+    console.log(document.body);
+    console.log(document.body.innerHTML);
+    let ul1 = document.getElementById('list-1');
+    console.log(ul1);
+
+</script>
 </body>
 </html>
