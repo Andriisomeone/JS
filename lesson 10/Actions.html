@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<script>
+    let usersJSON = localStorage.getItem('users');
+    console.log(usersJSON);
+
+    let users = JSON.parse(usersJSON);
+    console.log(users);
+
+    users.push({});
+    console.log(users);
+
+    localStorage.setItem('users', JSON.stringify(users));
+</script>
+</body>
+</html>
