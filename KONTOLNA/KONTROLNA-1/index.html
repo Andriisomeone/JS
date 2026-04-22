@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>Name/Value Pair Manager</title>
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: linear-gradient(to right, #5f8fbf, #3c6fa3);
+            margin: 0;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 600px;
+            margin: auto;
+            background: #fff;
+            padding: 20px;
+            border-radius: 6px;
+        }
+
+        .row {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+
+        input {
+            flex: 1;
+            padding: 8px;
+        }
+
+        button {
+            padding: 8px 12px;
+            cursor: pointer;
+        }
+
+        select {
+            width: 100%;
+            height: 150px;
+            margin-top: 10px;
+        }
+
+        .actions {
+            margin-top: 10px;
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+
+        @media (max-width: 500px) {
+            .row {
+                flex-direction: column;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+<div class="container">
+    <h2>Test</h2>
+
+    <!-- FIX: label пов'язаний з input -->
+    <label for="input">Name/Value Pair</label>
+    <div class="row">
+        <input id="input" placeholder="name=value" />
+        <button onclick="addPair()">Add</button>
+    </div>
+
+    <!-- FIX: label пов'язаний з select -->
+    <label for="list" style="margin-top:10px; display:block;">
+        Name/Value Pair List
+    </label>
+    <select id="list" multiple></select>
+
+    <div class="actions">
+        <button onclick="sortByName()">Sort by Name</button>
+        <button onclick="sortByValue()">Sort by Value</button>
+        <button onclick="deleteSelected()">Delete</button>
+    </div>
+</div>
+
+<script>
+    let pairs = [];
+
+    function parseInput(input) {
+        let parts = input.split('=');
+        if (parts.length !== 2) return null;
+
+        let name = parts[0].trim();
+        let value = parts[1].trim();
+
+        let valid = /^[a-z0-9]+$/i;
+
+        if (!valid.test(name) || !valid.test(value)) return null;
+
+        return { name, value };
+    }
+
+    function addPair() {
+        const inputEl = document.getElementById('input');
+        const input = inputEl.value;
+
+        const parsed = parseInput(input);
+        if (!parsed) {
+            alert("Invalid format. Use name=value with alphanumeric values only.");
+            return;
+        }
+
+        pairs.push(parsed);
+        inputEl.value = "";
+        renderList();
+    }
+
+    function renderList() {
+        const list = document.getElementById('list');
+        list.innerHTML = "";
+
+        pairs.forEach((p, index) => {
+            const option = document.createElement('option');
+
+            // FIX: value має бути string
+            option.value = String(index);
+
+            option.text = `${p.name}=${p.value}`;
+            list.appendChild(option);
+        });
+    }
+
+    function sortByName() {
+        pairs.sort((a, b) => a.name.localeCompare(b.name));
+        renderList();
+    }
+
+    function sortByValue() {
+        pairs.sort((a, b) => a.value.localeCompare(b.value));
+        renderList();
+    }
+
+    function deleteSelected() {
+        const list = document.getElementById('list');
+
+        // FIX: перетворюємо назад у number
+        const selected = Array.from(list.selectedOptions)
+            .map(o => parseInt(o.value, 10));
+
+        pairs = pairs.filter((_, index) => !selected.includes(index));
+        renderList();
+    }
+</script>
+
+</body>
+</html>

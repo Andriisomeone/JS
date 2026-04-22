@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>User Details</title>
+    <style>
+        .user, .post {
+            background: #f2f2f2;
+            margin: 10px;
+            padding: 15px;
+            border-radius: 10px;
+        }
+
+        .posts {
+            display: flex;
+            flex-wrap: wrap;
+        }
+
+        .post {
+            width: 18%;
+        }
+
+        button {
+            width: 90%;
+            display: block;
+            margin: 20px auto;
+            padding: 10px;
+        }
+    </style>
+</head>
+<body>
+
+<div id="user" class="user"></div>
+<button id="loadPosts">Posts of current user</button>
+
+<div class="posts" id="posts">
+    <!-- щоб не було warning -->
+    <div class="post" style="display:none;"></div>
+</div>
+
+<script>
+    const params = new URLSearchParams(window.location.search);
+    const userId = params.get('id');
+
+    const userDiv = document.getElementById('user');
+
+    function createList(obj) {
+        let ul = document.createElement('ul');
+
+        for (let key in obj) {
+            let li = document.createElement('li');
+
+            if (typeof obj[key] === 'object' && obj[key] !== null) {
+                li.innerText = key;
+                li.appendChild(createList(obj[key]));
+            } else {
+                li.innerText = `${key}: ${obj[key]}`;
+            }
+
+            ul.appendChild(li);
+        }
+
+        return ul;
+    }
+
+    fetch(`https://jsonplaceholder.typicode.com/users/${userId}`)
+        .then(res => res.json())
+        .then(user => {
+            userDiv.appendChild(createList(user));
+
+            document.getElementById('loadPosts').onclick = () => {
+                fetch(`https://jsonplaceholder.typicode.com/users/${user.id}/posts`)
+                    .then(res => res.json())
+                    .then(posts => {
+                        const container = document.getElementById('posts');
+                        container.innerHTML = '';
+
+                        posts.forEach(post => {
+                            const div = document.createElement('div');
+                            div.className = 'post';
+
+                            div.innerHTML = `
+                            <p>${post.title}</p>
+                            <a href="post-details.html?id=${post.id}">
+                                Details
+                            </a>
+                        `;
+
+                            container.appendChild(div);
+                        });
+                    });
+            };
+        });
+</script>
+
+</body>
+</html>

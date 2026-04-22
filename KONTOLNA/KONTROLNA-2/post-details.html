@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Post Details</title>
+    <style>
+        .post, .comment {
+            background: #f2f2f2;
+            margin: 10px;
+            padding: 15px;
+            border-radius: 10px;
+        }
+
+        .comments {
+            display: flex;
+            flex-wrap: wrap;
+        }
+
+        .comment {
+            width: 22%;
+        }
+    </style>
+</head>
+<body>
+
+<div id="post" class="post"></div>
+
+<div class="comments" id="comments">
+    <!-- щоб не було warning -->
+    <div class="comment" style="display:none;"></div>
+</div>
+
+<script>
+    const params = new URLSearchParams(window.location.search);
+    const postId = params.get('id');
+
+    const postDiv = document.getElementById('post');
+
+    function createList(obj) {
+        let ul = document.createElement('ul');
+
+        for (let key in obj) {
+            let li = document.createElement('li');
+
+            if (typeof obj[key] === 'object' && obj[key] !== null) {
+                li.innerText = key;
+                li.appendChild(createList(obj[key]));
+            } else {
+                li.innerText = `${key}: ${obj[key]}`;
+            }
+
+            ul.appendChild(li);
+        }
+
+        return ul;
+    }
+
+    fetch(`https://jsonplaceholder.typicode.com/posts/${postId}`)
+        .then(res => res.json())
+        .then(post => {
+            postDiv.appendChild(createList(post));
+
+            return fetch(`https://jsonplaceholder.typicode.com/posts/${post.id}/comments`);
+        })
+        .then(res => res.json())
+        .then(comments => {
+            const container = document.getElementById('comments');
+
+            comments.forEach(comment => {
+                const div = document.createElement('div');
+                div.className = 'comment';
+
+                div.innerHTML = `
+                <p><b>${comment.name}</b></p>
+                <p>${comment.body}</p>
+                <p><i>${comment.email}</i></p>
+            `;
+
+                container.appendChild(div);
+            });
+        });
+</script>
+
+</body>
+</html>
